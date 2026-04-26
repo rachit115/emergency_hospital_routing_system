@@ -1,0 +1,74 @@
+/* Header Component Styles */
+header {
+    background: linear-gradient(135deg, #0d1b2a, #16213e);
+    color: #fff;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid #1e3a5f;
+}
+
+header .header-left {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+header .title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+header .title span {
+    color: #e94560;
+}
+
+header .subtitle {
+    font-size: 0.72rem;
+    color: #a0c0e0;
+    margin-top: 2px;
+    letter-spacing: 0.2px;
+}
+
+header .header-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.backend-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.backend-badge.online {
+    background: #2ecc71;
+    border-color: #27ae60;
+    color: #fff;
+}
+
+.backend-badge.offline {
+    background: #f39c12;
+    border-color: #e67e22;
+    color: #fff;
+}
+
+header .team {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #a0c0e0;
+    line-height: 1.4;
+}
+
+header .team span {
+    font-size: 0.7rem;
+    color: #7a9bc4;
+}
