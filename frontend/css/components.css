@@ -1,0 +1,214 @@
+/* Styling for the navigation tabs (Patient, Hospitals, Algorithm) */
+.tabs { display: flex; gap: 3px; background: #edf0f4; padding: 3px; border-radius: 10px; }
+.tab {
+  flex: 1; padding: 8px 6px; text-align: center;
+  border-radius: 8px; cursor: pointer; font-size: 0.75rem; font-weight: 600;
+  color: #7a8a9e; transition: all 0.18s; user-select: none;
+}
+.tab.on { background: white; color: #e94560; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+/* Generic styling for card-like container blocks */
+.card { background: white; border-radius: 12px; padding: 14px; border: 1px solid #e8edf3; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+.card h3 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.1px; color: #0f3460; margin-bottom: 13px; font-family: 'Space Mono', monospace; }
+
+/* Styling for input fields, select dropdowns, and form labels */
+.form-group { margin-bottom: 11px; }
+.form-group label { display: block; font-size: 0.76rem; font-weight: 600; color: #4a5568; margin-bottom: 4px; }
+.label-note { font-weight: 400; color: #aab; font-size: 0.72rem; }
+.form-group input, .form-group select {
+  width: 100%; padding: 8px 11px;
+  border: 1.5px solid #e2e8f0; border-radius: 8px;
+  font-size: 0.87rem; background: #fafbfc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit; color: #1e2a3a;
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: #e94560; background: white; box-shadow: 0 0 0 3px rgba(233,69,96,0.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.checkbox-row { display: flex; gap: 16px; align-items: center; padding: 8px 0; }
+.checkbox-row label { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; cursor: pointer; font-weight: 500; }
+
+/* Styling for the location search input and autocomplete suggestions */
+.search-wrap { display: flex; gap: 6px; }
+.loc-input { flex: 1; }
+.search-btn {
+  width: 40px; border: none; background: #e94560; color: white;
+  border-radius: 8px; cursor: pointer; font-size: 1rem;
+  transition: background 0.2s, transform 0.1s; flex-shrink: 0;
+}
+.search-btn:hover { background: #c0392b; transform: scale(1.05); }
+.suggestions {
+  position: absolute; top: calc(100% + 2px); left: 0; right: 0;
+  background: white; border: 1.5px solid #e2e8f0; border-radius: 10px;
+  z-index: 1000; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-height: 220px; overflow-y: auto;
+}
+.sug-item { padding: 10px 13px; cursor: pointer; font-size: 0.82rem; border-bottom: 1px solid #f5f5f5; transition: background 0.15s; line-height: 1.4; }
+.sug-item:hover { background: #fff5f6; color: #e94560; }
+.sug-item.loading { color: #888; cursor: default; }
+
+/* Styling for patient severity level indicators (Level 1 to 4) */
+.severity-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 0.77rem; font-weight: 700; font-family: 'Space Mono', monospace;
+  letter-spacing: 0.4px; transition: all 0.25s;
+}
+.severity-badge.severity-1 { background: #d5f5e3; color: #1e8449; }
+.severity-badge.severity-2 { background: #fef9c3; color: #856404; }
+.severity-badge.severity-3 { background: #fde9d9; color: #c0392b; }
+.severity-badge.severity-4 { background: #e74c3c; color: white; }
+@keyframes sev4pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(231,76,60,0.5); } 50% { box-shadow: 0 0 0 6px rgba(231,76,60,0); } }
+
+/* Styling for badges that distinguish between hospitals and dispensaries */
+.facility-badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 0.77rem; font-weight: 700; margin-left: 6px;
+  transition: all 0.25s;
+}
+.facility-badge.dispensary { background: #f3e8ff; color: #6d28d9; }
+.facility-badge.hospital   { background: #dbeafe; color: #1d4ed8; }
+
+/* Generic button styling used throughout the interface */
+.btn {
+  width: 100%; padding: 12px; border: none; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 700; cursor: pointer;
+  transition: all 0.2s; font-family: inherit; margin-top: 8px;
+  letter-spacing: 0.2px;
+}
+.btn-primary-red { background: linear-gradient(135deg, #e94560, #c0392b); color: white; }
+.btn-primary-red:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(233,69,96,0.35); }
+.btn-primary-red:active { transform: translateY(0); }
+.btn-secondary-blue { background: #0f3460; color: white; }
+.btn-secondary-blue:hover { background: #0a2744; }
+
+/* Styling for the quick-result summary box shown in the sidebar */
+.result-box { border-radius: 12px; padding: 13px; display: none; animation: fadeIn 0.3s ease; }
+.result-box.ok  { background: #d5f5e3; border: 2px solid #2ecc71; }
+.result-box.err { background: #fadbd8; border: 2px solid #e74c3c; }
+.result-box.dispensary-ok { background: #f3e8ff; border: 2px solid #9b59b6; }
+.result-box h4  { font-size: 0.9rem; margin-bottom: 9px; }
+.result-row { display: flex; justify-content: space-between; font-size: 0.81rem; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+.result-row:last-child { border: none; }
+.result-row span:first-child { color: #555; }
+
+/* Styling for the list of available hospitals and dispensaries */
+.hospital-item { padding: 10px; border-radius: 9px; border: 1.5px solid #eee; margin-bottom: 8px; font-size: 0.79rem; cursor: pointer; transition: all 0.18s; background: #fafbfc; }
+.hospital-item:hover { border-color: #e94560; background: #fff5f6; }
+.hospital-item.best  { border-color: #2ecc71; background: #d5f5e3; }
+.hospital-item.dispensary-item { border-color: #9b59b6; background: #faf5ff; }
+.hospital-item.dispensary-item:hover { background: #f3e8ff; }
+.hospital-name { font-weight: 700; font-size: 0.84rem; margin-bottom: 4px; }
+.hospital-stats { display: flex; gap: 8px; color: #666; flex-wrap: wrap; margin-bottom: 4px; }
+.bar  { height: 5px; background: #eee; border-radius: 3px; overflow: hidden; }
+.bar-fill   { height: 100%; border-radius: 3px; transition: width 0.5s; }
+
+/* Styling for the algorithm selection and details tab */
+.algo-box { background: linear-gradient(150deg, #0d1b2a 0%, #1a1a2e 100%); color: white; border-radius: 12px; padding: 16px; font-size: 0.78rem; }
+.algo-box h4 { color: #e94560; margin-bottom: 14px; font-size: 0.85rem; font-family: 'Space Mono', monospace; }
+.algo-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.algo-item:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+.algo-num { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e94560; background: rgba(233,69,96,0.12); padding: 3px 7px; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
+.algo-name { font-weight: 700; font-size: 0.82rem; color: #fff; margin-bottom: 2px; }
+.algo-desc { color: rgba(255,255,255,0.5); margin-bottom: 4px; font-size: 0.75rem; }
+.algo-item code { background: rgba(255,255,255,0.1); padding: 2px 7px; border-radius: 4px; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #7ec8e3; }
+
+/* Styling for the map overlay showing what different path colors mean */
+.paths-legend {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  z-index: 500;
+  font-size: 0.78rem;
+  min-width: 160px;
+}
+.path-legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; font-weight: 500; }
+.path-legend-item:last-child { margin-bottom: 0; }
+.path-legend-line { height: 4px; width: 36px; border-radius: 3px; flex-shrink: 0; }
+.path-legend-line.fastest { background: #e74c3c; box-shadow: 0 0 6px rgba(231,76,60,0.5); }
+.path-legend-line.alt1    { background: #f39c12; opacity: 0.75; }
+.path-legend-line.alt2    { background: #3498db; opacity: 0.6; }
+
+/* Styling for the map overlay explaining map markers */
+.map-legend {
+  position: absolute;
+  bottom: 20px; right: 10px;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  z-index: 500;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+.legend-item { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.legend-item:last-child { margin-bottom: 0; }
+.dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.15); flex-shrink: 0; }
+
+/* Floating button to open the detailed full-screen result view */
+.full-result-btn {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: linear-gradient(135deg, #0f3460, #1a1a2e);
+  color: white; border: none; border-radius: 30px;
+  padding: 10px 20px; font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; z-index: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: all 0.2s; font-family: inherit;
+}
+.full-result-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+/* Styling for the online/offline backend status indicator */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.backend-badge {
+  font-size: 0.72rem;
+  font-family: 'Space Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.backend-badge.online  { background: rgba(46,204,113,0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+.backend-badge.offline { background: rgba(243,156,18,0.2);  color: #f39c12; border: 1px solid #f39c12; }
+
+/* Styling for the emergency mode toggle and GPS fetching UI */
+.emergency-toggle {
+  background: #fff5f6;
+  border: 1.5px solid #ffc0cc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+.etoggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #c0392b;
+}
+.etoggle-label input { accent-color: #e94560; width:16px; height:16px; cursor:pointer; }
+.etoggle-text { line-height: 1.4; }
+
+.emergency-gps-box {
+  background: #1a1a2e;
+  color: #7ec8e3;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 10px;
+}
+
+/* Styling for fastest row (complexity table) */
+.comp-table tbody tr.fastest-row td { color: #1e8449; }
+.comp-table tbody tr.fastest-row { background: #f0fff6; }
+.used-badge  { background:#dbeafe; color:#1e40af; font-size:0.68rem; padding:2px 6px; border-radius:10px; margin-left:4px; font-weight:600; }
+.fast-badge  { background:#d5f5e3; color:#1e8449; font-size:0.68rem; padding:2px 6px; border-radius:10px; margin-left:4px; font-weight:600; }
