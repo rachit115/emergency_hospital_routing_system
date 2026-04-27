@@ -11,7 +11,7 @@ Automatically selects best hospital based on:
 
 Patient severity (Low / Medium / High / Critical)
 Distance from patient (real road distance using OSRM)
-Hospital load (beds occupied vs capacity)
+Hospital load (beds occupied vs capacity)	
 ICU availability (for critical cases)
 
 👉 Uses optimized scoring:
