@@ -1,0 +1,99 @@
+/* Basic Modal Forms */
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.room-card {
+    border: 1px solid #ccc;
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+    background: #fff;
+}
+
+.room-card:hover {
+    background: #eee;
+}
+
+.room-card.selected {
+    background: #ffeded;
+    border-color: #cc0000;
+}
+
+.room-card .room-name {
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.room-card .room-price {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+/* Doctor Cards */
+.doctor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.doc-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.doc-card:hover {
+    background: #eee;
+}
+
+.doc-card.selected {
+    background: #e0f0ff;
+    border-color: #0000ff;
+}
+
+.doc-avatar {
+    width: 30px;
+    height: 30px;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1rem;
+}
+
+.doc-name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Budget & Review */
+.budget-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-family: monospace;
+}
+
+.star {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star.lit {
+    color: #ffcc00;
+}
+
+.review-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+}

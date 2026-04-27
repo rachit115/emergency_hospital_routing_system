@@ -1,0 +1,109 @@
+/* ---------------------------------------------------
+   HOSPITAL MODAL - SUMMARY & ACTIONS
+   Summary Box, Buttons, Confirmed State
+   --------------------------------------------------- */
+
+/* --- Summary Section --- */
+.hm-summary {
+    background: linear-gradient(135deg, #f8faff, #eff6ff);
+    border: 1.5px solid #dbeafe;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.83rem;
+}
+
+.hm-sum-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hm-sum-row .label-text {
+    color: #7a8a9e;
+}
+
+.hm-sum-row .value-text {
+    font-weight: 700;
+    color: #1e2a3a;
+}
+
+.hm-sum-total {
+    border-top: 1.5px solid #dbeafe;
+    margin-top: 6px;
+    padding-top: 8px;
+}
+
+.hm-sum-total .value-text {
+    color: #e94560;
+    font-size: 1.05rem;
+}
+
+
+/* --- Action Buttons --- */
+.hm-confirm-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #e94560, #c0392b);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 10px;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.hm-confirm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+}
+
+.result-screen-card .hm-btn-small {
+    width: 100%;
+    padding: 9px;
+    background: linear-gradient(135deg, #e94560, #c0392b);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.result-screen-card .hm-btn-small:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+
+/* --- Confirmed/Success State --- */
+.hm-confirmed {
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.hm-confirmed .confirm-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.hm-confirmed h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e8449;
+    margin-bottom: 6px;
+}
+
+.hm-confirmed p {
+    color: #666;
+    font-size: 0.88rem;
+}
