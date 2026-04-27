@@ -1,0 +1,84 @@
+<div class="card">
+  <h3>🚑 Patient & Algorithm</h3>
+
+  <!-- ALGO SELECTOR -->
+  <div class="form-group">
+    <label>⚙️ Algorithm</label>
+    <select id="algoSelect-{{ID}}" onchange="syncAlgoSelect()">
+      <option value="Dijkstra">Dijkstra (Recommended ✅)</option>
+      <option value="BFS">BFS (Unweighted demo)</option>
+      <option value="Bellman-Ford">Bellman-Ford (Negative edges demo)</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Age</label>
+      <input id="pAge-{{ID}}" type="number" value="65" min="1" max="120" oninput="updSev('{{ID}}')">
+    </div>
+    <div class="form-group">
+      <label>Condition</label>
+      <select id="pCond-{{ID}}" onchange="updSev('{{ID}}')">
+        <option value="cardiac arrest">Cardiac Arrest</option>
+        <option value="stroke">Stroke</option>
+        <option value="fracture">Fracture</option>
+        <option value="burn">Burn</option>
+        <option value="accident">Accident</option>
+        <option value="fever">Fever</option>
+        <option value="pain">General Pain</option>
+        <option value="cut">Minor Cut</option>
+        <option value="minor burn">Minor Burn</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Symptoms</label>
+    <div class="checkbox-row">
+      <label><input type="checkbox" id="pUncon-{{ID}}" onchange="updSev('{{ID}}')"> 😵 Unconscious</label>
+      <label><input type="checkbox" id="pBleed-{{ID}}" onchange="updSev('{{ID}}')"> 🩸 Bleeding</label>
+    </div>
+  </div>
+
+  <!-- EMERGENCY MODE TOGGLE -->
+  <div class="emergency-toggle" id="emergencyToggleBox-{{ID}}">
+    <label class="etoggle-label">
+      <input type="checkbox" id="emergencyMode-{{ID}}" onchange="toggleEmergencyMode('{{ID}}')">
+      <span class="etoggle-text">🚨 Emergency Mode — use current GPS, skip details</span>
+    </label>
+  </div>
+
+  <!-- NORMAL MODE: location search -->
+  <div id="normalFields-{{ID}}">
+    <div class="form-group" style="position:relative">
+      <label>📍 Location <span class="label-note">(naam se search)</span></label>
+      <div class="search-wrap">
+        <input id="locSearch-{{ID}}" class="loc-input" placeholder="e.g. ISBT Dehradun, Rajpur Road..." oninput="onLocInput('{{ID}}')" autocomplete="off" onkeydown="onLocKey(event,'{{ID}}')">
+        <button class="search-btn" onclick="fetchSug(document.getElementById('locSearch-{{ID}}').value,'suggestions-{{ID}}','{{ID}}')">🔍</button>
+      </div>
+      <div class="suggestions" id="suggestions-{{ID}}"></div>
+    </div>
+    <div class="form-group">
+      <label>GPS <span class="label-note">(auto-filled)</span></label>
+      <div class="form-row">
+        <input id="pLat-{{ID}}" type="number" placeholder="Latitude" step="0.0001">
+        <input id="pLng-{{ID}}" type="number" placeholder="Longitude" step="0.0001">
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY MODE: GPS auto -->
+  <div id="emergencyFields-{{ID}}" style="display:none">
+    <div class="emergency-gps-box" id="emergencyGpsBox-{{ID}}">
+      <span>📡 Fetching GPS...</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:8px">
+    <span class="severity-badge" id="sevBadge-{{ID}}">Severity: –</span>
+    <span class="facility-badge" id="facilityBadge-{{ID}}"></span>
+  </div>
+  <button class="btn btn-primary-red" onclick="findRoute('{{ID}}')">🚑 Find Nearest Hospital</button>
+  <button class="btn btn-secondary-blue" onclick="resetAll()">🔄 Reset</button>
+</div>
+<div class="result-box" id="rbox-{{ID}}"></div>

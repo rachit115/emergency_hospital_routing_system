@@ -1,0 +1,18 @@
+<div class="map-panel" id="mapPanel" style="display:none">
+  <div id="map" style="position:absolute;top:0;left:0;right:0;bottom:0;"></div>
+  <div class="paths-legend" id="pathsLegend" style="display:none">
+    <b style="display:block;margin-bottom:8px;font-size:0.75rem;letter-spacing:0.5px">ROUTES</b>
+    <div class="path-legend-item" id="pl1"><div class="path-legend-line fastest"></div><span></span></div>
+    <div class="path-legend-item" id="pl2"><div class="path-legend-line alt1"></div><span></span></div>
+    <div class="path-legend-item" id="pl3"><div class="path-legend-line alt2"></div><span></span></div>
+  </div>
+  <div class="map-legend" id="legend">
+    <b style="display:block;margin-bottom:6px;font-size:0.78rem">Legend</b>
+    <div class="legend-item"><div class="dot" style="background:#2ecc71"></div>Low &lt;50%</div>
+    <div class="legend-item"><div class="dot" style="background:#f39c12"></div>Medium 50–80%</div>
+    <div class="legend-item"><div class="dot" style="background:#e74c3c"></div>High &gt;80%</div>
+    <div class="legend-item"><div class="dot" style="background:#9b59b6"></div>Dispensary</div>
+    <div class="legend-item">🚑 Patient</div>
+  </div>
+  <button class="full-result-btn" id="fullResultBtn" style="display:none" onclick="openResult()">📋 Full Result →</button>
+</div>
