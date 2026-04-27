@@ -3,5 +3,66 @@
     <button class="result-screen-back" onclick="closeResult()">← Back to Map</button>
     <h2 id="rs-title">Patient Allocated</h2>
   </div>
-  <div class="result-screen-body" id="rs-body"></div>
+  <div class="result-screen-body" id="rs-body">
+    <!-- Patient Card -->
+    <div class="result-screen-card highlight" id="rs-card-patient">
+      <div class="result-screen-card-title">🚑 Patient Details</div>
+      <div class="result-screen-row"><span class="label-text">Severity</span><span class="value-text" id="rs-val-severity"></span></div>
+      <div class="result-screen-row"><span class="label-text">Facility Type</span><span class="value-text" id="rs-val-type"></span></div>
+      <div class="result-screen-row"><span class="label-text">ICU Needed</span><span class="value-text" id="rs-val-icu-needed"></span></div>
+      <div class="result-screen-row"><span class="label-text">Algorithm Used</span><span class="value-text"><b id="rs-val-algo"></b></span></div>
+    </div>
+
+    <!-- Route Card -->
+    <div class="result-screen-card">
+      <div class="result-screen-card-title">🛣️ Route</div>
+      <div class="result-screen-big-text"><span id="rs-val-dist"></span> <span style="font-size:1rem">km</span></div>
+      <div class="result-screen-big-subtext">Best road distance (OSRM)</div>
+      <div class="result-screen-row" style="margin-top:12px"><span class="label-text">Est. Time</span><span class="value-text" id="rs-val-time"></span></div>
+      <div class="result-screen-row"><span class="label-text">Route Type</span><span class="value-text" id="rs-val-route-type"></span></div>
+    </div>
+
+    <!-- Hospital Card -->
+    <div class="result-screen-card">
+      <div class="result-screen-card-title" id="rs-val-hosp-title">🏥 Hospital</div>
+      <div class="result-screen-row"><span class="label-text">Name</span><span class="value-text" id="rs-val-hosp-name"></span></div>
+      <div class="result-screen-row"><span class="label-text">Beds</span><span class="value-text" id="rs-val-hosp-beds"></span></div>
+      <div class="result-screen-row" id="rs-row-icu"><span class="label-text">ICU Free</span><span class="value-text" id="rs-val-hosp-icu"></span></div>
+      <div class="result-screen-row"><span class="label-text">Score</span><span class="value-text" id="rs-val-hosp-score"></span></div>
+      <div class="result-screen-bar-wrap">
+        <div class="result-screen-bar-label"><span>Load</span><span id="rs-val-load-pct"></span></div>
+        <div class="result-screen-bar"><div class="result-screen-bar-fill" id="rs-val-load-bar"></div></div>
+      </div>
+      <button class="hm-btn-small" onclick="closeResult();openHospPanel()" style="margin-top:10px">🏥 Check-In Panel</button>
+    </div>
+
+    <!-- Algo Performance Card -->
+    <div class="result-screen-card">
+      <div class="result-screen-card-title">⚡ Algo Performance</div>
+      <div class="result-screen-row"><span class="label-text">Algorithm</span><span class="value-text"><b id="rs-val-perf-algo"></b></span></div>
+      <div class="result-screen-row"><span class="label-text">Execution Time</span><span class="value-text" id="rs-val-perf-time"></span></div>
+      <div class="result-screen-row"><span class="label-text">Nodes (V)</span><span class="value-text" id="rs-val-perf-nodes"></span></div>
+      <div class="result-screen-row"><span class="label-text">Edges (E)</span><span class="value-text" id="rs-val-perf-edges"></span></div>
+      <div class="result-screen-row"><span class="label-text">Eligible</span><span class="value-text" id="rs-val-perf-eligible"></span></div>
+    </div>
+
+    <!-- Tables -->
+    <div class="result-screen-card result-screen-full-width">
+      <div class="result-screen-card-title">📊 All Hospitals — Comparison Table
+        <span style="font-weight:400;font-size:0.72rem;color:#888;margin-left:8px">Click header to sort</span>
+      </div>
+      <div id="compTableWrap"></div>
+    </div>
+
+    <div class="result-screen-card result-screen-full-width">
+      <div class="result-screen-card-title">⏱️ Time Complexity: Dijkstra vs BFS vs Bellman-Ford</div>
+      <div id="complexityTableWrap"></div>
+    </div>
+
+    <!-- Why Section -->
+    <div class="result-screen-card result-screen-full-width">
+      <div class="result-screen-card-title">🔬 Why This Hospital Was Chosen</div>
+      <p style="font-size:0.84rem;line-height:2;color:#444" id="rs-why-text"></p>
+    </div>
+  </div>
 </div>
