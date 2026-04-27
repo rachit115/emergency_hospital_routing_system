@@ -51,7 +51,7 @@
   <!-- NORMAL MODE: location search -->
   <div id="normalFields-{{ID}}">
     <div class="form-group" style="position:relative">
-      <label>📍 Location <span class="label-note">(naam se search)</span></label>
+      <label>📍 Location <span class="label-note">(search via location name)</span></label><!--location ke naam se search-->
       <div class="search-wrap">
         <input id="locSearch-{{ID}}" class="loc-input" placeholder="e.g. ISBT Dehradun, Rajpur Road..." oninput="onLocInput('{{ID}}')" autocomplete="off" onkeydown="onLocKey(event,'{{ID}}')">
         <button class="search-btn" onclick="fetchSug(document.getElementById('locSearch-{{ID}}').value,'suggestions-{{ID}}','{{ID}}')">🔍</button>
