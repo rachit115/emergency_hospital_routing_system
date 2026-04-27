@@ -28,8 +28,9 @@ Dijkstra (Recommended ✅)
 BFS (Unweighted demo)
 Bellman-Ford (Negative edge demo)
 📋 Hospital Comparison System
-All hospitals ranked dynamically
-Shows:
+
+All hospitals are ranked dynamically:
+
 Distance
 Load %
 ICU availability
@@ -58,14 +59,14 @@ Faster allocation
 🔄 Dynamic UI System
 Tabs (Patient / Hospitals / Algorithm)
 Sidebar + Map layout
-Live updates using JS
+Live updates using JavaScript
 🏗️ Tech Stack
 Layer	Technology
 Frontend	HTML, CSS, JavaScript
 Map	Leaflet.js
 API	OSRM, Nominatim
 Backend	Node.js
-Algorithm	C++ (Dijkstra Implementation)
+Algorithm	C++ (Dijkstra)
 Architecture	Modular + API-based
 🗄️ Data Structure
 🔹 Patient Input
@@ -80,13 +81,27 @@ ICU beds
 Doctors available
 Rating
 🔄 Application Flow
-
-1️⃣ User enters patient details
-2️⃣ Location fetched (manual / GPS)
-3️⃣ Severity calculated
-4️⃣ Algorithm runs (C++ backend)
-5️⃣ Hospitals ranked
-6️⃣ Best hospital selected
-7️⃣ Map routes displayed
-8️⃣ Result dashboard shown
-9️⃣ User can proceed to check-in
+User enters patient details
+Location fetched (manual / GPS)
+Severity calculated
+Algorithm runs (C++ backend)
+Hospitals ranked
+Best hospital selected
+Map routes displayed
+Result dashboard shown
+User proceeds to check-in
+⚙️ How to Run
+🔧 Requirements
+Node.js (v16+)
+g++ Compiler
+npm / npx
+🛠️ Setup & Execution
+1️⃣ Clone Repository
+git clone https://github.com/your-username/Hospital-Routing-System.git
+cd Hospital-Routing-System
+2️⃣ Compile C++ Backend
+g++ -std=c++17 -O2 -o dijkstra *.cpp
+3️⃣ Start Backend Server
+node server.js
+4️⃣ Run Frontend
+npx serve .
