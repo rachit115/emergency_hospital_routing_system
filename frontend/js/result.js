@@ -1,10 +1,8 @@
-/* result.js — Full Result Screen, Score Table, Complexity Table
-   Rachit Singh */
 
 let sortKey = 'score';
 let sortAsc = true;
 
-/* ── OPEN FULL RESULT SCREEN ────────────────────────────────── */
+/* ── OPEN FULL RESULT SCREEN  WHEN RESULT IS AVAILABLE────────────────────────────────── */
 function openResult() {
   if (!lastResult) return;
   const { best, ranked, eligibleRanked, sev, name, age, cond, estTime, needIcu, useDisp, algoTimeMs, nodeCount, edgeCount, algoUsed } = lastResult;
@@ -127,10 +125,10 @@ function sortTable(key) {
 /* ── TIME COMPLEXITY TABLE ──────────────────────────────────── */
 function buildComplexityTable(actualMs, algoUsed) {
   const V = 11, E = 20;
-  // Pure algorithm time estimates (no OSRM/network time)
-  const dijkstraMs  = (0.0009).toFixed(4);  // O((V+E)logV) on 11 nodes
-  const bfsMs       = (0.0003).toFixed(4);  // O(V+E) — fastest raw
-  const bellmanMs   = (0.0033).toFixed(4);  // O(V*E) = 220 ops
+  // Pure algorithm time estimates 
+  const dijkstraMs  = (0.0009).toFixed(4);  
+  const bfsMs       = (0.0003).toFixed(4);  
+  const bellmanMs   = (0.0033).toFixed(4);  
 
   const algos = [
     { name:'Dijkstra', used: algoUsed==='Dijkstra',     time:'O((V+E) log V)', space:'O(V+E)', negEdge:'❌ No',  best:'Non-negative weights ✅', ms: dijkstraMs },
