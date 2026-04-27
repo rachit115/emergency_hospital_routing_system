@@ -15,70 +15,55 @@ function openResult() {
   const loadPct  = (load * 100).toFixed(0);
   const barColor = load < 0.5 ? '#2ecc71' : load < 0.8 ? '#f39c12' : '#e74c3c';
 
-  $('rs-body').innerHTML = `
+  // Update Patient Details
+  $('rs-card-patient').className = `result-screen-card ${useDisp ? 'disp-hl' : 'highlight'}`;
+  $('rs-val-severity').innerHTML = `<span class="severity-badge s${sev}">${SEV_LABELS[sev]}</span>`;
+  $('rs-val-type').textContent = useDisp ? '💊 Dispensary' : '🏥 Hospital';
+  $('rs-val-icu-needed').textContent = needIcu ? '✅ Yes' : '❌ No';
+  $('rs-val-algo').textContent = algoUsed;
 
-    <div class="result-screen-card ${useDisp?'disp-hl':'highlight'}">
-      <div class="result-screen-card-title">🚑 Patient Details</div>
-      <div class="result-screen-row"><span class="label-text">Severity</span><span class="value-text"><span class="severity-badge s${sev}">${SEV_LABELS[sev]}</span></span></div>
-      <div class="result-screen-row"><span class="label-text">Facility Type</span><span class="value-text">${useDisp?'💊 Dispensary':'🏥 Hospital'}</span></div>
-      <div class="result-screen-row"><span class="label-text">ICU Needed</span><span class="value-text">${needIcu?'✅ Yes':'❌ No'}</span></div>
-      <div class="result-screen-row"><span class="label-text">Algorithm Used</span><span class="value-text"><b>${algoUsed}</b></span></div>
-    </div>
+  // Update Route
+  $('rs-val-dist').textContent = eligibleRanked[0]?.dist.toFixed(1) || '—';
+  $('rs-val-time').textContent = `~${estTime} min`;
+  $('rs-val-route-type').textContent = sev === 4 ? '🚨 Emergency' : '🔵 Normal';
 
-    <div class="result-screen-card">
-      <div class="result-screen-card-title">🛣️ Route</div>
-      <div class="result-screen-big-text">${eligibleRanked[0]?.dist.toFixed(1)||'—'} <span style="font-size:1rem">km</span></div>
-      <div class="result-screen-big-subtext">Best road distance (OSRM)</div>
-      <div class="result-screen-row" style="margin-top:12px"><span class="label-text">Est. Time</span><span class="value-text">~${estTime} min</span></div>
-      <div class="result-screen-row"><span class="label-text">Route Type</span><span class="value-text">${sev===4?'🚨 Emergency':'🔵 Normal'}</span></div>
-    </div>
+  // Update Hospital Details
+  $('rs-val-hosp-title').textContent = useDisp ? '💊 Dispensary' : '🏥 Hospital';
+  $('rs-val-hosp-name').textContent = best.name;
+  $('rs-val-hosp-beds').textContent = `${best.pts}/${best.cap}`;
+  
+  const icuRow = $('rs-row-icu');
+  if (best.type === 'hospital') {
+    icuRow.style.display = 'flex';
+    $('rs-val-hosp-icu').textContent = best.icu - best.icuOcc;
+  } else {
+    icuRow.style.display = 'none';
+  }
+  
+  $('rs-val-hosp-score').textContent = eligibleRanked[0]?.score.toFixed(2);
+  $('rs-val-load-pct').textContent = `${loadPct}%`;
+  $('rs-val-load-bar').style.width = `${loadPct}%`;
+  $('rs-val-load-bar').style.background = barColor;
 
-    <div class="result-screen-card">
-      <div class="result-screen-card-title">${useDisp?'💊 Dispensary':'🏥 Hospital'}</div>
-      <div class="result-screen-row"><span class="label-text">Name</span><span class="value-text">${best.name}</span></div>
-      <div class="result-screen-row"><span class="label-text">Beds</span><span class="value-text">${best.pts}/${best.cap}</span></div>
-      ${best.type==='hospital'?`<div class="result-screen-row"><span class="label-text">ICU Free</span><span class="value-text">${best.icu-best.icuOcc}</span></div>`:''}
-      <div class="result-screen-row"><span class="label-text">Score</span><span class="value-text">${eligibleRanked[0]?.score.toFixed(2)}</span></div>
-      <div class="result-screen-bar-wrap">
-        <div class="result-screen-bar-label"><span>Load</span><span>${loadPct}%</span></div>
-        <div class="result-screen-bar"><div class="result-screen-bar-fill" style="width:${loadPct}%;background:${barColor}"></div></div>
-      </div>
-      <button class="hm-btn-small" onclick="closeResult();openHospPanel()" style="margin-top:10px">🏥 Check-In Panel</button>
-    </div>
+  // Update Performance
+  $('rs-val-perf-algo').textContent = algoUsed;
+  $('rs-val-perf-time').textContent = `${algoTimeMs} ms`;
+  $('rs-val-perf-nodes').textContent = nodeCount;
+  $('rs-val-perf-edges').textContent = edgeCount;
+  $('rs-val-perf-eligible').textContent = `${eligibleRanked.length} of ${ranked.length}`;
 
-    <div class="result-screen-card">
-      <div class="result-screen-card-title">⚡ Algo Performance</div>
-      <div class="result-screen-row"><span class="label-text">Algorithm</span><span class="value-text"><b>${algoUsed}</b></span></div>
-      <div class="result-screen-row"><span class="label-text">Execution Time</span><span class="value-text">${algoTimeMs} ms</span></div>
-      <div class="result-screen-row"><span class="label-text">Nodes (V)</span><span class="value-text">${nodeCount}</span></div>
-      <div class="result-screen-row"><span class="label-text">Edges (E)</span><span class="value-text">${edgeCount}</span></div>
-      <div class="result-screen-row"><span class="label-text">Eligible</span><span class="value-text">${eligibleRanked.length} of ${ranked.length}</span></div>
-    </div>
-
-    <div class="result-screen-card result-screen-full-width">
-      <div class="result-screen-card-title">📊 All Hospitals — Comparison Table
-        <span style="font-weight:400;font-size:0.72rem;color:#888;margin-left:8px">Click header to sort</span>
-      </div>
-      <div id="compTableWrap"></div>
-    </div>
-
-    <div class="result-screen-card result-screen-full-width">
-      <div class="result-screen-card-title">⏱️ Time Complexity: Dijkstra vs BFS vs Bellman-Ford</div>
-      ${buildComplexityTable(algoTimeMs, algoUsed)}
-    </div>
-
-    <div class="result-screen-card result-screen-full-width">
-      <div class="result-screen-card-title">🔬 Why This Hospital Was Chosen</div>
-      <p style="font-size:0.84rem;line-height:2;color:#444">
-        <b>Step 1 — Severity:</b> Scored <span class="severity-badge s${sev}">${SEV_LABELS[sev]}</span> (condition: ${cond}).<br>
-        <b>Step 2 — Pool:</b> ${useDisp?'Minor → Dispensary.':'Hospital pool selected.'}<br>
-        <b>Step 3 — ${algoUsed}:</b> ${eligibleRanked.length} facilities ranked in ${algoTimeMs} ms.<br>
-        <b>Step 4 — Scoring:</b> <code>score = distance × (1 + load)</code>${sev===4?' + ICU bonus.':'.'}<br>
-        <b>Step 5 — Winner:</b> <b>${best.name}</b> — score: <b>${eligibleRanked[0]?.score.toFixed(2)}</b>.
-      </p>
-    </div>`;
+  // Why Section
+  $('rs-why-text').innerHTML = `
+    <b>Step 1 — Severity:</b> Scored <span class="severity-badge s${sev}">${SEV_LABELS[sev]}</span> (condition: ${cond}).<br>
+    <b>Step 2 — Pool:</b> ${useDisp ? 'Minor → Dispensary.' : 'Hospital pool selected.'}<br>
+    <b>Step 3 — ${algoUsed}:</b> ${eligibleRanked.length} facilities ranked in ${algoTimeMs} ms.<br>
+    <b>Step 4 — Scoring:</b> <code>score = distance × (1 + load)</code>${sev === 4 ? ' + ICU bonus.' : '.'}<br>
+    <b>Step 5 — Winner:</b> <b>${best.name}</b> — score: <b>${eligibleRanked[0]?.score.toFixed(2)}</b>.
+  `;
 
   buildCompTable(ranked, sev, sortKey, sortAsc);
+  buildComplexityTable(algoTimeMs, algoUsed);
+
   $('resultScreen').classList.add('open');
 }
 
@@ -172,7 +157,7 @@ function buildComplexityTable(actualMs, algoUsed) {
     </tr>`;
   }).join('');
 
-  return `<div class="table-scroll"><table class="comp-table">
+  const html = `<div class="table-scroll"><table class="comp-table">
     <thead><tr>
       <th>Algorithm</th><th>Time</th><th>Space</th>
       <th>Neg Edges</th><th>Best For</th><th>Est. Time (V=${V}, E=${E})</th>
@@ -184,6 +169,9 @@ function buildComplexityTable(actualMs, algoUsed) {
     Bellman-Ford handles negative weights which road distances never have — unnecessary overhead.
     <b>Dijkstra</b> = correct shortest path + near-optimal speed for non-negative weighted graphs. Best choice here.
   </p>`;
+
+  $('complexityTableWrap').innerHTML = html;
+
 }
 
 function closeResult() { $('resultScreen').classList.remove('open'); }
