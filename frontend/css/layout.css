@@ -1,7 +1,4 @@
-/* ============================================================
-   EMERGENCY HOSPITAL ROUTING SYSTEM — STYLESHEET v4
-   Team: DAA-IV-T080 | Region: Uttarakhand
-   ============================================================ */
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -40,7 +37,7 @@ header {
   inset: -4px;
   border: 2px solid #e94560;
   border-radius: 50%;
-  /* no pulse animation */
+
 }
 @keyframes pulse {
   0%   { transform: scale(0.9); opacity: 1; }
@@ -135,7 +132,7 @@ header {
   background: #f1f5f9;
   overflow: hidden;
   animation: fadeIn 0.4s ease;
-  padding: 10px; /* Internal padding for the rounded panel look */
+  padding: 10px; 
 }
 
 #map {
