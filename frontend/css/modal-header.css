@@ -1,0 +1,56 @@
+/* Basic Modal Header */
+.hosp-modal-header {
+    background: #2c3e50;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1a252f;
+}
+
+.hosp-modal-icon {
+    font-size: 2rem;
+}
+
+.hosp-modal-header h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.hosp-modal-header p {
+    font-size: 0.8rem;
+    color: #bdc3c7;
+}
+
+.hosp-close {
+    background: #ff4d4d;
+    color: #fff;
+    border: 1px solid #999;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hosp-close:hover {
+    background: #ff1a1a;
+}
+
+.hosp-modal-body {
+    padding: 20px;
+}
+
+.hm-section {
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.hm-section-title {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3px;
+}

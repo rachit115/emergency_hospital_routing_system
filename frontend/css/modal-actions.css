@@ -1,0 +1,45 @@
+/* Basic Modal Actions */
+
+.hm-summary {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.hm-sum-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.hm-sum-total {
+    border-top: 2px solid #333;
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.hm-confirm-btn {
+    width: 100%;
+    padding: 12px;
+    background: #27ae60;
+    color: #fff;
+    border: 1px solid #1e8449;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.hm-confirm-btn:hover {
+    background: #2ecc71;
+}
+
+.hm-confirmed {
+    text-align: center;
+    padding: 20px;
+}
+
+.confirm-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}

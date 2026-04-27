@@ -1,0 +1,119 @@
+/* Basic Result Screen */
+.result-screen {
+    display: none;
+    position: fixed;
+    inset: 60px 0 0;
+    background: #ffffff;
+    z-index: 9998;
+    flex-direction: column;
+    overflow-y: auto;
+    border-top: 2px solid #ccc;
+}
+
+.result-screen.open {
+    display: flex;
+}
+
+.result-screen-header {
+    background: #eee;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-screen-header h2 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.result-screen-back {
+    padding: 5px 15px;
+    background: #fff;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+
+.result-screen-back:hover {
+    background: #ddd;
+}
+
+.result-screen-body {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.result-screen-full-width {
+    grid-column: 1 / -1;
+}
+
+.result-screen-card {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.result-screen-card-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-screen-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px dotted #eee;
+    font-size: 0.9rem;
+}
+
+.result-screen-big-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #cc0000;
+}
+
+.result-screen-bar {
+    height: 10px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    margin: 5px 0;
+}
+
+.result-screen-bar-fill {
+    height: 100%;
+    background: #007bff;
+}
+
+.hospital-rank {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border: 1px solid #eee;
+    margin-bottom: 5px;
+}
+
+.hospital-rank:first-child {
+    background: #e0ffe0;
+    border-color: #008000;
+}
+
+.rank-num {
+    font-weight: bold;
+    color: #333;
+}
+
+.rank-name {
+    font-weight: bold;
+}
+
+.rank-score {
+    margin-left: auto;
+    color: #cc0000;
+    font-weight: bold;
+}
