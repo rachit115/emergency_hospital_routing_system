@@ -1,4 +1,4 @@
-/* ui.js — Sidebar, Emergency Mode, Algo Sync, Hospital Panel, Nominatim */
+/* ui.js  content — Sidebar, Emergency Mode, Algo Sync, Hospital Panel, Nominatim */
 
 let panelState = { facility:null, selectedRoom:null, selectedDoc:null, budget:'', stars:0 };
 let sugTimer = {};
