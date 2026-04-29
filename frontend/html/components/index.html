@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Hospital Routing | DAA-IV-T080</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/utilities.css" />
+
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="css/components/header.css" />
+  <link rel="stylesheet" href="css/components/forms.css" />
+  <link rel="stylesheet" href="css/components/map.css" />
+  
+  <!-- Modal & Overlay Styles (Organized) -->
+  <link rel="stylesheet" href="css/loader.css" />
+  <link rel="stylesheet" href="css/result-screen.css" />
+  <link rel="stylesheet" href="css/modal-wrapper.css" />
+  <link rel="stylesheet" href="css/modal-header.css" />
+  <link rel="stylesheet" href="css/modal-forms.css" />
+  <link rel="stylesheet" href="css/modal-actions.css" />
+</head>
+
+<body>
+
+  <!-- Mount points for global components -->
+  <div id="header-mount"></div>
+  <div id="loader-mount"></div>
+  <div id="modals-mount"></div>
+
+  <div class="wrapper" id="mainWrapper">
+    <!-- CENTER PANEL -->
+    <div class="center-panel" id="centerPanel">
+      <div class="center-form-box">
+        <div class="center-header">
+          <div class="center-icon">🚑</div>
+          <h2>Emergency Hospital Routing</h2>
+          <p>Condition aur location bharo — > best hospital </p>
+        </div>
+
+        <div class="tabs">
+          <div class="tab on" onclick="doTab('patient',this)">🚑 Patient</div>
+          <div class="tab" onclick="doTab('hospitals',this)">🏥 Network</div>
+          <div class="tab" onclick="doTab('algo',this)">📊 Algo</div>
+        </div>
+
+        <div id="tab-patient"></div>
+        <div id="tab-hospitals" style="display:none"></div>
+        <div id="tab-algo" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar" style="display:none">
+      <div class="tabs">
+        <div class="tab on" onclick="doTabSide('patient',this)">🚑 Patient</div>
+        <div class="tab" onclick="doTabSide('hospitals',this)">🏥 Network</div>
+        <div class="tab" onclick="doTabSide('algo',this)">📊 Algo</div>
+      </div>
+
+      <div id="stab-patient"></div>
+      <div id="stab-hospitals" style="display:none"></div>
+      <div id="stab-algo" style="display:none"></div>
+    </div>
+  </div>
+
+  <!-- External Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Component Loader  -->
+  <script src="js/component-loader.js"></script>
+
+  <!-- Core Scripts  -->
+  <script src="js/data.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/routing.js"></script>
+  <script src="js/result.js"></script>
+  <script src="js/ui.js"></script>
+
+  <script>
+    // Load components on page load
+    document.addEventListener('DOMContentLoaded', async function () {
+      // Load shared components
+      await loadComponents([
+        { name: 'header', target: '#header-mount' },
+        { name: 'loader', target: '#loader-mount' },
+        { name: 'modals', target: '#modals-mount' },
+      ]);
+
+      // Load center panel components
+      await loadComponents([
+        { name: 'patient-form', target: '#tab-patient', vars: { ID: 'center' } },
+        { name: 'hospital-list', target: '#tab-hospitals', vars: { ID: 'center' } },
+        { name: 'algo-info', target: '#tab-algo', vars: { ID: 'center' } },
+      ]);
+
+      // Load sidebar components
+      await loadComponents([
+        { name: 'patient-form', target: '#stab-patient', vars: { ID: 'side' } },
+        { name: 'hospital-list', target: '#stab-hospitals', vars: { ID: 'side' } },
+        { name: 'algo-info', target: '#stab-algo', vars: { ID: 'side' } },
+      ]);
+
+      // Load map panel
+      await loadComponent('map-panel', '#mainWrapper', {});
+      await loadComponent('result-screen', 'body', {});
+      await loadComponent('route-chooser', '#mapPanel', {});
+
+      // Initialize UI after components have loaded
+      if (typeof initUI === 'function') {
+        initUI();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
