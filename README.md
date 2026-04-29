@@ -52,7 +52,7 @@ Severity Calculation
         ↓
 Location Fetch (Manual / GPS)
         ↓
-C++ Routing Algorithm (Dijkstra)
+C++ Routing Algorithm (Algos)
         ↓
 Hospital Ranking
         ↓
@@ -106,19 +106,20 @@ Check-In Panel
 ## 📁 Project Structure
 
 ```
-emergency_hospital_routing_system/
-│
-├── frontend/
-│   ├── index.html
-│   ├── css/
-│   └── js/
 │
 ├── backend/
-│   ├── server.js
-│   └── *.cpp
+│ ├── *.cpp / *.hpp (Graph Algorithms)
+│ ├── main.cpp
+│ ├── server.js (Node.js backend)
+│ └── utils & models
 │
-├── components/
-├── screenshots/
+├── frontend/
+│ ├── index.html
+│ ├── css/
+│ ├── js/
+│ ├── components/
+│ └── documentation files
+│
 └── README.md
 ```
 
@@ -165,7 +166,7 @@ http://localhost:3000
 
 ## 📈 Learning Outcomes
 
-- Graph Algorithms (Dijkstra, BFS, Bellman-Ford)  
+- Graph Algorithms (Dijkstra, BFS, Bellman-Ford, DFS , A* Algorithm,Floyd-Warshall Algorithm)  
 - API Integration (OSRM, Nominatim)  
 - Frontend + Backend Integration  
 - Real-world routing simulation  
