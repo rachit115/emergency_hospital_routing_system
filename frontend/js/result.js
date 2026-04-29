@@ -1,11 +1,13 @@
+/* result.js — Full Result Screen, Score Table, Complexity Table
+   Rachit Singh */
 
 let sortKey = 'score';
 let sortAsc = true;
 
-/* ── OPEN FULL RESULT SCREEN  WHEN RESULT IS AVAILABLE────────────────────────────────── */
+/* ── OPEN FULL RESULT SCREEN ────────────────────────────────── */
 function openResult() {
   if (!lastResult) return;
-  const { best, ranked, eligibleRanked, sev, name, age, cond, estTime, needIcu, useDisp, algoTimeMs, nodeCount, edgeCount, algoUsed } = lastResult;
+  const { best, ranked, eligibleRanked, sev, name, age, cond, estTime, needIcu, useDisp, algoTimeMs, nodeCount, edgeCount, algoUsed, algoResults } = lastResult;
 
   $('rs-title').textContent = `${useDisp?'💊':'🚑'} ${name} → ${best.name}`;
 
@@ -60,9 +62,68 @@ function openResult() {
   `;
 
   buildCompTable(ranked, sev, sortKey, sortAsc);
-  buildComplexityTable(algoTimeMs, algoUsed);
+  buildComplexityTable(algoResults, algoUsed);
+  buildRouteChooser(algoResults);
 
   $('resultScreen').classList.add('open');
+}
+
+/* ── ROUTE CHOOSER PANEL (Floating on Map) ───────────────────── */
+function buildRouteChooser(algoResults) {
+  console.log("Building Route Chooser with:", algoResults);
+  if (!algoResults) {
+    console.warn("No algoResults found in response.");
+    return;
+  }
+  const container = $('rc-cards-container');
+  if (!container) return;
+
+  const ALGO_CONFIG = {
+    'Dijkstra':     { color: '#4e8cff', desc: 'Optimal weighted path', icon: '🔵', best: true },
+    'BFS':          { color: '#2ecc71', desc: 'Least congested path', icon: '🟢', best: false },
+    'Bellman-Ford': { color: '#f39c12', desc: 'Safest ICU-aware path', icon: '🟠', best: false },
+    'DFS':          { color: '#9b59b6', desc: 'Rating-biased deep search', icon: '🟣', best: false },
+    'A*':           { color: '#e74c3c', desc: 'Heuristic spatial search', icon: '🔴', best: false },
+    'Floyd-Warshall':{ color: '#3498db', desc: 'All-pairs, doctor-aware', icon: '💎', best: false }
+  };
+
+  container.innerHTML = '';
+
+  Object.entries(ALGO_CONFIG).forEach(([name, cfg]) => {
+    const res = algoResults[name];
+    if (!res) return;
+    const top = res.topHospital;
+    if (!top || top.id === -1) return;
+
+    const f = facilities.find(fac => fac.id === top.id);
+    const dist = top.dist > 1000 ? 0 : top.dist; // Safety for infinite distances
+    const time = (dist / 50 * 60).toFixed(0);
+    const ms = res.algoTimeMs.toFixed(4);
+
+    const card = document.createElement('div');
+    card.className = `rc-card ${cfg.best ? 'best' : ''}`;
+    card.style.borderLeft = `4px solid ${cfg.color}`;
+    
+    card.innerHTML = `
+      <div class="rc-card-main">
+        <div class="rc-card-left">
+          <div class="rc-algo-name">${cfg.icon} ${name} ${cfg.best ? '🏆' : ''}</div>
+          <div class="rc-algo-desc">${cfg.desc}</div>
+          <div class="rc-target-hosp">→ ${f ? f.name.split(',')[0] : 'Unknown'}</div>
+          <div class="rc-traversal-time" style="font-size:0.8rem; margin-top:5px; color:#4e8cff; font-weight:bold;">
+            ⚡ ${ms} ms (Actual)
+          </div>
+        </div>
+        <div class="rc-card-right">
+          <div class="rc-travel-time">${time} min</div>
+          <div class="rc-dist">${dist.toFixed(1)} km</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  $('routeChooserPanel').style.display = 'block';
 }
 
 /* ── SORTABLE TABLE ─────────────────────────────────────────── */
@@ -123,24 +184,29 @@ function sortTable(key) {
 }
 
 /* ── TIME COMPLEXITY TABLE ──────────────────────────────────── */
-function buildComplexityTable(actualMs, algoUsed) {
+function buildComplexityTable(algoResults, algoUsed) {
   const V = 11, E = 20;
-  // Pure algorithm time estimates 
-  const dijkstraMs  = (0.0009).toFixed(4);  
-  const bfsMs       = (0.0003).toFixed(4);  
-  const bellmanMs   = (0.0033).toFixed(4);  
 
   const algos = [
-    { name:'Dijkstra', used: algoUsed==='Dijkstra',     time:'O((V+E) log V)', space:'O(V+E)', negEdge:'❌ No',  best:'Non-negative weights ✅', ms: dijkstraMs },
-    { name:'BFS',      used: algoUsed==='BFS',           time:'O(V + E)',       space:'O(V)',   negEdge:'❌ No',  best:'Unweighted graphs only',   ms: bfsMs },
-    { name:'Bellman-Ford', used: algoUsed==='Bellman-Ford', time:'O(V × E)',   space:'O(V)',   negEdge:'✅ Yes', best:'Negative edge weights',    ms: bellmanMs },
+    { name:'Dijkstra',       key:'Dijkstra',       time:'O((V+E) log V)', space:'O(V+E)', negEdge:'❌ No',  best:'Non-negative weights ✅' },
+    { name:'BFS',            key:'BFS',            time:'O(V + E)',       space:'O(V)',   negEdge:'❌ No',  best:'Unweighted graphs only' },
+    { name:'Bellman-Ford',   key:'Bellman-Ford',   time:'O(V × E)',       space:'O(V)',   negEdge:'✅ Yes', best:'Negative edge weights' },
+    { name:'DFS',            key:'DFS',            time:'O(V + E)',       space:'O(V)',   negEdge:'❌ No',  best:'Deep search exploration' },
+    { name:'A*',             key:'A*',             time:'O((V+E) log V)', space:'O(V+E)', negEdge:'❌ No',  best:'Heuristic-guided search' },
+    { name:'Floyd-Warshall', key:'Floyd-Warshall', time:'O(V³)',           space:'O(V²)',  negEdge:'✅ Yes', best:'All-pairs shortest paths' },
   ];
 
-  const minMs = Math.min(...algos.map(a => +a.ms));
+  // Map backend results to the list
+  const data = algos.map(a => {
+    const res = algoResults ? algoResults[a.key] : null;
+    return { ...a, ms: res ? res.algoTimeMs.toFixed(4) : "0.0000" };
+  });
 
-  const rows = algos.map(a => {
+  const minMs = Math.min(...data.map(a => +a.ms));
+
+  const rows = data.map(a => {
     const isFastest = +a.ms === minMs;
-    const isUsed    = a.used;
+    const isUsed    = algoUsed === a.key;
     // fastest gets green, used gets blue — both can coexist
     return `<tr class="${isUsed ? 'best-row' : ''} ${isFastest && !isUsed ? 'fastest-row' : ''}">
       <td><b>${a.name}</b>
@@ -158,7 +224,7 @@ function buildComplexityTable(actualMs, algoUsed) {
   const html = `<div class="table-scroll"><table class="comp-table">
     <thead><tr>
       <th>Algorithm</th><th>Time</th><th>Space</th>
-      <th>Neg Edges</th><th>Best For</th><th>Est. Time (V=${V}, E=${E})</th>
+      <th>Neg Edges</th><th>Best For</th><th>Actual Measured Time (ms)</th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table></div>
