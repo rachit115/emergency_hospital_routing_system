@@ -5,19 +5,7 @@
 
 const double BFS_INFINITY = 1e18;
 
-/*
-  BFS Algorithm for Hospital Routing
-  -----------------------------------
-  BFS explores nodes level by level (nearest hop first).
-  Since our graph is small (patient + hospitals), BFS visits
-  each hospital exactly once. We store the actual edge weight
-  (distance) when we first visit a node — that is the BFS-found distance.
 
-  Note: BFS does NOT guarantee shortest DISTANCE in a weighted graph.
-  It guarantees shortest PATH in terms of number of hops.
-  For comparison/demo purposes, we record the weight of the first
-  edge used to reach each node (direct patient→hospital edge).
-*/
 std::vector<double> runBFSAlgorithm(int totalNodes, const std::vector<std::vector<Edge>>& adjacencyList, int sourceNode) {
     std::vector<double> distances(totalNodes, BFS_INFINITY);
     std::vector<bool> visited(totalNodes, false);
