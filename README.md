@@ -23,15 +23,16 @@ It provides:
 
 ## 🧠 Algorithms Used
 
-### 🔹 Dijkstra Algorithm
-- Finds shortest path from patient to hospitals  
-- Works on weighted graphs  
+### 
+- Dijkstra’s Algorithm
+- Bellman-Ford Algorithm
+- Breadth First Search (BFS)
+- Depth First Search (DFS)
+- A* Algorithm
+- Floyd-Warshall Algorithm
 
-### 🔹 BFS (Breadth-First Search)
-- Used for comparison (unweighted)  
+---
 
-### 🔹 Bellman-Ford
-- Demonstration of negative edge handling  
 
 ### 🔹 Scoring System
 ```
