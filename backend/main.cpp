@@ -1,10 +1,4 @@
-/*
-  main.cpp — Hospital Routing Backend (C++)
-  Team: DAA-IV-T080 | Shantanu Devrani
-  
-  Input (stdin):  JSON with patient + hospitals data
-  Output (stdout): JSON with ranked hospitals + algorithm statistics
-*/
+
 
 #include <iostream>
 #include <vector>
