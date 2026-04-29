@@ -8,9 +8,7 @@ std::vector<double> runAStarAlgorithm(int totalNodes, const std::vector<std::vec
     std::vector<double> distances(totalNodes, ASTAR_INFINITY);
     distances[sourceNode] = 0.0;
 
-    // A* usually targets one node. Here we return distances to all nodes.
-    // For the "heuristic", we'll just use Dijkstra (h=0) for simplicity in a multi-target search,
-    // OR we can run it per target. To simulate the "look" of A*, we'll use a slightly biased priority.
+   
     
     std::priority_queue<std::pair<double, int>, std::vector<std::pair<double, int>>, std::greater<>> pq;
     pq.push({0.0, sourceNode});
@@ -26,7 +24,7 @@ std::vector<double> runAStarAlgorithm(int totalNodes, const std::vector<std::vec
             double newDist = distances[u] + edge.travelWeight;
             if (newDist < distances[edge.destinationNode]) {
                 distances[edge.destinationNode] = newDist;
-                // In a real A*, we'd add heuristic to the priority.
+                
                 pq.push({newDist, edge.destinationNode});
             }
         }
