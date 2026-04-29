@@ -11,7 +11,7 @@ std::vector<double> runDijkstraAlgorithm(int totalNodes, const std::vector<std::
     priorityQueue.push({0.0, sourceNode});
 
     while (!priorityQueue.empty()) {
-        // C++11 compatible syntax to extract values (avoids GCC 6.x issues with structured bindings)
+    
         double currentDistance = priorityQueue.top().first;
         int currentNode = priorityQueue.top().second;
         priorityQueue.pop();
