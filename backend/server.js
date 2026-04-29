@@ -1,12 +1,4 @@
-/*
-  server.js — Hospital Routing Backend Server
-  Team: DAA-IV-T080
 
-  - Runs C++ dijkstra binary with patient+hospital JSON
-  - Returns ranked results to frontend via HTTP
-  - Start: node server.js
-  - Port: 3000
-*/
 
 const http  = require('http');
 const { execFile, exec } = require('child_process');
